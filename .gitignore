@@ -1,0 +1,37 @@
+# Python bytecode files
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual environment folder
+venv/
+.env/
+
+# Database files (if you're using SQLite or similar)
+*.db
+*.sqlite
+
+# Flask specific (instance, config)
+instance/
+config.py
+
+# VS Code settings
+.vscode/
+
+# MacOS Finder
+.DS_Store
+
+# Windows files
+Thumbs.db
+
+# PyCharm IDE files
+.idea/
+
+# Logs
+*.log
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Environment files
+.env

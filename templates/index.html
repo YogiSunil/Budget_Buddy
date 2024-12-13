@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budget App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav>
+        <div class="logo">BudgetApp 🏠💰</div>
+        <div class="user-info">
+            {% if 'user_id' in session %}
+                <span>Welcome, {{ session['username'] }} 👋</span>
+                <a href="{{ url_for('settings') }}">Settings ⚙️</a>
+                <a href="{{ url_for('logout') }}">Logout 🚪</a>
+            {% else %}
+                <a href="{{ url_for('login') }}">Login 🔑</a>
+                <a href="{{ url_for('signup') }}">Sign Up ✍️</a>
+            {% endif %}
+        </div>
+    </nav>
+    <div class="content">
+        <h1>Welcome to Budget App 💡</h1>
+        <p>Manage your finances with ease! Stay budget-friendly and make smarter decisions 💵✨</p>
+        
+        <!-- Image from a URL -->
+        <div class="image-container">
+            <img src="https://media.licdn.com/dms/image/v2/C5612AQEf680wCk7org/article-cover_image-shrink_720_1280/article-cover_image-shrink_720_1280/0/1520137997683?e=2147483647&v=beta&t=XfoiCscBnMNV4QVjpioIe3hhM7FPTEzfC2UEWVjga-U" alt="Budgeting Image">
+        </div>
+
+        <p>Track your expenses, set goals, and get alerts when you're close to your limit!</p>
+
+        <!-- New Section: Additional Content Area -->
+        <section class="features">
+            <h2>What You Can Do</h2>
+            <ul>
+                <li>Set budgets for different categories</li>
+                <li>Track your spending over time</li>
+                <li>Set financial goals and stay on track</li>
+                <li>Receive alerts when you approach your budget limit</li>
+            </ul>
+        </section>
+
+        <section class="call-to-action">
+            <h2>Get Started Today!</h2>
+            <p>Start managing your finances better with BudgetApp. <a href="{{ url_for('signup') }}">Sign up</a> now and take control of your budget.</p>
+        </section>
+    </div>
+</body>
+</html>

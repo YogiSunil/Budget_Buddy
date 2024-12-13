@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <nav>
+        <div class="logo">BudgetApp 🏠💰</div>
+        <div class="user-info">
+            <span>Welcome, {{ user.username }} 👋</span>
+            <a href="{{ url_for('settings') }}">Settings ⚙️</a>
+            <a href="{{ url_for('logout') }}">Logout 🚪</a>
+        </div>
+    </nav>
+    <div class="content">
+        <h1>Settings ⚙️</h1>
+        <form method="POST">
+            <label for="username">New Username:</label>
+            <input type="text" name="username" id="username" value="{{ user.username }}">
+
+            <label for="password">New Password:</label>
+            <input type="password" name="password" id="password">
+
+            <button type="submit">Update</button>
+        </form>
+    </div>
+</body>
+</html>

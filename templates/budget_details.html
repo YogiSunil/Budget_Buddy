@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budget Details - Budget Buddy</title>
+  <style>
+    /* General Layout */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f8f8;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #4CAF50;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+header nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    margin: 0;
+}
+
+header nav ul li {
+    margin: 0 15px;
+}
+
+header nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+header h1 {
+    margin-top: 10px;
+    font-size: 28px;
+}
+
+/* Container */
+.container {
+    width: 80%;
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+/* Budget Details */
+.budget-details {
+    margin-bottom: 30px;
+}
+
+.budget-info {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.budget-info p {
+    margin: 10px 0;
+}
+
+/* Expense Form */
+.expense-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.expense-form input {
+    padding: 12px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    font-size: 16px;
+}
+
+.expense-form button {
+    padding: 12px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.expense-form button:hover {
+    background-color: #45a049;
+}
+
+/* Expense List */
+.expense-list {
+    margin-top: 30px;
+}
+
+.expense-list h3 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.expense-items {
+    margin-top: 15px;
+}
+
+.expense-item {
+    background-color: #f4f4f4;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.expense-item p {
+    margin: 0;
+    font-size: 16px;
+}
+
+/* No Expenses Message */
+.expense-list p {
+    font-size: 18px;
+    color: #888;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #4CAF50;
+    color: white;
+    margin-top: 30px;
+    border-top: 2px solid #ddd;
+}
+
+  </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('index') }}">Home</a></li>
+                <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
+                <li><a href="{{ url_for('logout') }}">Logout</a></li>
+            </ul>
+        </nav>
+        <h1>Budget Details: {{ budget.name }}</h1>
+    </header>
+
+    <div class="container">
+        <section class="budget-details">
+            <div class="budget-info">
+                <p><strong>Category:</strong> {{ budget.category }}</p>
+                <p><strong>Amount:</strong> ${{ budget.amount }}</p>
+                <p><strong>Time Frame:</strong> {{ budget.time_frame }}</p>
+            </div>
+
+            <h2>Add New Expense</h2>
+            <form action="{{ url_for('budget_details', budget_id=budget.id) }}" method="POST" class="expense-form">
+                <input type="text" name="name" placeholder="Expense Name" required>
+                <input type="number" step="0.01" name="amount" placeholder="Expense Amount" required>
+                <button type="submit">Add Expense</button>
+            </form>
+        </section>
+
+        <section class="expense-list">
+            <h3>Expenses</h3>
+            {% if expenses %}
+                <div class="expense-items">
+                    {% for expense in expenses %}
+                        <div class="expense-item">
+                            <p><strong>{{ expense.name }}:</strong> ${{ expense.amount }}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p>No expenses added yet. Start tracking your expenses!</p>
+            {% endif %}
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Budget Buddy. All rights reserved.</p>
+    </footer>
+</body>
+</html>

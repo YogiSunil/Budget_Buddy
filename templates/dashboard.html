@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - BudgetApp</title>
+    <style>
+        /* General Layout */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #4CAF50;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+header nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+header nav .logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+header nav .user-info a {
+    color: white;
+    text-decoration: none;
+    margin-left: 15px;
+    font-weight: 600;
+}
+
+header nav .user-info span {
+    font-size: 16px;
+}
+
+.container {
+    width: 85%;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.dashboard-header h1 {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.dashboard-header p {
+    font-size: 18px;
+    color: #555;
+}
+
+/* Budget List Section */
+.budget-list {
+    margin-top: 30px;
+}
+
+.budget-list h2 {
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.budget-items {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.budget-item {
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.budget-item h3 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.budget-item p {
+    font-size: 16px;
+    color: #555;
+    margin: 5px 0;
+}
+
+.budget-actions {
+    margin-top: 20px;
+}
+
+.view-btn, .delete-btn {
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-size: 16px;
+    margin-right: 15px;
+}
+
+.view-btn {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.view-btn:hover {
+    background-color: #45a049;
+}
+
+.delete-btn {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.delete-btn:hover {
+    background-color: #c0392b;
+}
+
+/* Create New Budget Section */
+.create-budget {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.create-btn {
+    background-color: #3498db;
+    color: white;
+    padding: 15px 30px;
+    font-size: 18px;
+    border-radius: 6px;
+    text-decoration: none;
+}
+
+.create-btn:hover {
+    background-color: #2980b9;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #4CAF50;
+    color: white;
+    margin-top: 30px;
+    border-top: 2px solid #ddd;
+}
+
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">BudgetApp 🏠💰</div>
+            <div class="user-info">
+                <span>Welcome, {{ session['username'] }} 👋</span>
+                <a href="{{ url_for('settings') }}">Settings ⚙️</a>
+                <a href="{{ url_for('logout') }}">Logout 🚪</a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <section class="dashboard-header">
+            <h1>Your Budgets 📊</h1>
+            <p>View and manage all your budgets. Track your expenses and stay on top of your finances.</p>
+        </section>
+
+        <!-- Budget List Section -->
+        <section class="budget-list">
+            <h2>Current Budgets</h2>
+            <div class="budget-items">
+                {% for budget in budgets %}
+                <div class="budget-item">
+                    <h3>{{ budget.name }}</h3>
+                    <p><strong>Category:</strong> {{ budget.category }}</p>
+                    <p><strong>Amount:</strong> ${{ budget.amount }}</p>
+                    <p><strong>Time Frame:</strong> {{ budget.time_frame }}</p>
+                    <div class="budget-actions">
+                        <a href="{{ url_for('budget_details', budget_id=budget.id) }}" class="view-btn">View Details</a>
+                        <a href="{{ url_for('delete_budget', budget_id=budget.id) }}" class="delete-btn">Delete 🗑️</a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+
+        <!-- Create New Budget Link -->
+        <section class="create-budget">
+            <a href="{{ url_for('new_budget') }}" class="create-btn">Create a new budget ✨</a>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 BudgetApp. All rights reserved.</p>
+    </footer>
+</body>
+</html>

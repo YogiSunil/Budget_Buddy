@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create New Budget</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h2>Create a New Budget</h2>
+            <p>Set a new budget for your finances and track your spending effectively!</p>
+        </header>
+        
+        <form method="POST" class="budget-form">
+            <label for="name">Budget Name:</label>
+            <input type="text" name="name" id="name" placeholder="e.g. Grocery, Rent" required><br><br>
+
+            <label for="category">Category:</label>
+            <input type="text" name="category" id="category" placeholder="e.g. Food, Bills" required><br><br>
+
+            <label for="amount">Budget Amount:</label>
+            <input type="number" name="amount" id="amount" placeholder="Amount in USD" required><br><br>
+
+            <label for="time_frame">Time Frame:</label>
+            <select name="time_frame" id="time_frame" required>
+                <option value="monthly">Monthly</option>
+                <option value="quarterly">Quarterly</option>
+            </select><br><br>
+
+            <button type="submit" class="btn-submit">Save Budget</button>
+        </form>
+
+        <div class="back-link">
+            <a href="{{ url_for('dashboard') }}">Back to Dashboard</a>
+        </div>
+    </div>
+</body>
+</html>
